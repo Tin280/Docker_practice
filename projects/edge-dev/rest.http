@@ -1,0 +1,4 @@
+@baseurl = http://localhost:3000
+
+### GET request
+GET {{baseurl}}/ HTTP/1.1

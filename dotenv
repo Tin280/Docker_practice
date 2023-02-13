@@ -1,0 +1,2 @@
+TSDB_TOKEN = <API_TOKEN>
+REST_API_PORT = <default 3000>

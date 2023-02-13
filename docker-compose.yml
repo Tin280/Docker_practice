@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  edge-dev:
+    image: i-edge-dev
+    environment:
+      - SERVICE_NAME=${COMPOSE_PROJECT_NAME}
+    build:
+      context: ./
+      dockerfile: ./containers/edge-dev/Dockerfile
+    volumes:
+      - "./projects/edge-dev:/usr/src/app"
+    networks:
+      - iotp-network
+  rest-api:
+    image: i-rest-api
+    environment:
+      - SERVICE_NAME=${COMPOSE_PROJECT_NAME}
+      - TSDB_TOKEN=${TSDB_TOKEN}
+    build:
+      context: ./
+      dockerfile: ./containers/rest-api/Dockerfile
+    networks:
+      - iotp-network
+    ports:
+      - ${REST_API_PORT}:3000
+    volumes:
+      - ./projects/rest-api:/home/node
+      - /home/node/node_modules
+networks:
+  iotp-network:
